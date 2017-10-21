@@ -3,6 +3,7 @@ const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 const request = require('request');
 const stats = require('stats-lite');
+const exphbs  = require('express-handlebars');
 
 // setup, authentication and session boilerplate
 // -------------------------------------------------------------------------------
@@ -24,7 +25,12 @@ passport.serializeUser(function(obj, cb) {
 
 passport.deserializeUser(function(accessToken, cb) {
   cb(null, accessToken);
-});const app = express();
+});
+
+const app = express();
+// handlebars set up
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
@@ -86,9 +92,8 @@ app.get('/', (req, res) => {
       const viewerFollowerFollowersCounts = viewerFollowerFollowers.map((follower) => {
         return follower.node.followers.totalCount;
       });
-      const averageFollowerFollowers = Math.round(stats.mean(viewerFollowerFollowersCounts));
-      console.log(averageFollowerFollowers);
-      res.send(JSON.stringify(body));
+      const averageFollowerFollowersCount = Math.round(stats.mean(viewerFollowerFollowersCounts));
+      res.render('home', {viewerFollowerCount, averageFollowerFollowersCount})
     })
   } else {
      // render homepage with login to GitHub button

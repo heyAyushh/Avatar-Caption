@@ -1,21 +1,16 @@
-/* styles */
-/* called by your view template */
-
-/* You might want to try something fancier: */
-/* less: http://lesscss.org/ */
-
 * {
   box-sizing: border-box;
+  font-family: Roboto;
 }
 
 body {
-  font-family: helvetica, arial, sans-serif;
-  margin: 25px;
+  background-color: #818284;
+  text-align: center;
 }
 
-h1 {
+h1, h2 {
   font-weight: bold;
-  color: pink;
+  color: white;
 }
 
 .bold {
@@ -26,42 +21,6 @@ p {
   max-width: 600px;
 }
 
-form {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: cyan;
-  display: inline-block;
-  width: 100%;
-  max-width: 340px;
-  border-radius: 3px;
-}
-
-input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
-}
-
-button {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: yellow;
-}
-
-button:active {
-  box-shadow: none;
-}
 
 li {
   margin-bottom: 5px;
