@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
         viewer {
         avatarUrl,
         name
-        }  
+        }}  
     `;
     const body = { query: graphqlQuery };
     request.post('https://api.github.com/graphql', {
@@ -78,8 +78,8 @@ app.get('/', (req, res) => {
       if (error) {
          console.log('error', error); 
       }
-      const urls = body.data;
-      console.log(body.data);
+      const urls = body.data.viewer.name;
+      console.log(urls);
       res.render('home', urls)
 
     })
