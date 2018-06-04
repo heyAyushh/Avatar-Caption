@@ -10,7 +10,7 @@ const exphbs  = require('express-handlebars');
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "https://github-graphql-example-app.glitch.me/callback"
+    callbackURL: "https://pool-mosquito.glitch.me/callback"
 }, function(accessToken, refreshToken, profile, cb) {
     const user = {
       token: accessToken
@@ -62,9 +62,9 @@ app.get('/', (req, res) => {
     const graphqlQuery = `
       query {
         viewer {
-        avatarUrl
+        avatarUrl,
+        name
         }  
-     }
     `;
     const body = { query: graphqlQuery };
     request.post('https://api.github.com/graphql', {
@@ -78,8 +78,8 @@ app.get('/', (req, res) => {
       if (error) {
          console.log('error', error); 
       }
-      const url = body.data.viewer.avatarUrl;
-      res.render('home', url)
+      const urls = body.data.viewer.avatarUrl;
+      res.render('home', urls)
     })
   } else {
      // render homepage with login to GitHub button
