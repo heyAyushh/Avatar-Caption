@@ -78,8 +78,10 @@ app.get('/', (req, res) => {
       if (error) {
          console.log('error', error); 
       }
-      const urls = body.data.viewer.avatarUrl;
+      const urls = body.data;
+      console.log(body.data);
       res.render('home', urls)
+
     })
   } else {
      // render homepage with login to GitHub button
