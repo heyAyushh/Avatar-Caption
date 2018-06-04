@@ -62,17 +62,8 @@ app.get('/', (req, res) => {
     const graphqlQuery = `
       query {
         viewer {
-            followers(first: 100) {
-              totalCount
-              edges {
-                node {
-                  followers(first: 1) {
-                    totalCount
-                  }
-                }
-              }
-           }
-         }
+        avatarUrl
+        }  
      }
     `;
     const body = { query: graphqlQuery };
@@ -87,13 +78,8 @@ app.get('/', (req, res) => {
       if (error) {
          console.log('error', error); 
       }
-      const viewerFollowerCount = body.data.viewer.followers.totalCount;
-      const viewerFollowerFollowers = body.data.viewer.followers.edges;
-      const viewerFollowerFollowersCounts = viewerFollowerFollowers.map((follower) => {
-        return follower.node.followers.totalCount;
-      });
-      const averageFollowerFollowersCount = Math.round(stats.mean(viewerFollowerFollowersCounts));
-      res.render('home', {viewerFollowerCount, averageFollowerFollowersCount})
+      const url = body.data.viewer.avatarUrl;
+      res.render('home', url)
     })
   } else {
      // render homepage with login to GitHub button
