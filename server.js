@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
       if (error) {
          console.log('error', error); 
       }
-      const urls = body.data.viewer.name;
+      const urls = body.data.viewer;
       console.log(urls);
       res.render('home', urls)
 
