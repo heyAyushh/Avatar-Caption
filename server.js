@@ -81,13 +81,15 @@ app.get('/', (req, res) => {
       const urls = body.data.viewer;
       const vision={};
       vision.url=body.data.viewer.avatarUrl
+      console.log(vision);
       console.log(urls);
       
             request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0',{
         vision,
         headers: {
         'User-Agent': 'my glitch app',
-        'Authorization': `Bearer ${process.env.COG_KEY}`,
+          'Content-Type':'application/json',
+        'Ocp-Apim-Subscription-Key': `${process.env.COG_KEY}`,
         },
           json:true,
     },(error, response, body) => {
