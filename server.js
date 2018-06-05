@@ -82,7 +82,7 @@ app.get('/', (req, res) => {
       console.log(urls);
       res.send(urls)
 
-    })
+    }).pipe(request.post())
   } else {
      // render homepage with login to GitHub button
     res.redirect('/login'); 
