@@ -1,10 +1,11 @@
+
 const express = require('express');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 const request = require('request');
 const stats = require('stats-lite');
 const exphbs  = require('express-handlebars');
-
+/*
 // setup, authentication and session boilerplate
 // -------------------------------------------------------------------------------
 passport.use(new GitHubStrategy({
@@ -90,18 +91,16 @@ app.get('/', (req, res) => {
         'Content-Type':'application/json',
         'Ocp-Apim-Subscription-Key': `${process.env.COG_KEY}`,
         },
-          json:true,
     },(error, response, body) => {
       if (error) {
          console.log('error', error); 
       }
               else{
-                res.send(response.description);
+                res.send(response);
                 console.log(response.message);
               }
               
-            })hai hi nahi
-
+            })
     })
   } else {
      // render homepage with login to GitHub button
@@ -114,3 +113,22 @@ app.get('/', (req, res) => {
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+*/      const vision={};
+      vision.url=body.data.viewer.avatarUrl
+      console.log(vision);
+      console.log(urls);
+      
+            request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description',{
+        vision,
+        headers: {
+        'Content-Type':'application/json',
+        'Ocp-Apim-Subscription-Key': `${process.env.COG_KEY}`,
+        },
+    },(error, response, body) => {
+      if (error) {
+         console.log('error', error); 
+      }
+              else{
+                res.send(response);
+                console.log(response.message);
+              }
