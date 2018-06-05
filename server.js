@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
       }
       const urls = body.data.viewer;
       console.log(urls);
-      res.render('home', urls)
+      res.send(urls)
 
     })
   } else {
