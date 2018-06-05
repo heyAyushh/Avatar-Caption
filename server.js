@@ -71,7 +71,7 @@ app.get('/', (req, res) => {
       body,
       headers: {
         'User-Agent': 'my glitch app',
-        'Authorization': `Bearer ${process.COG_KEY}`,
+        'Authorization': `Bearer ${req.user.token}`,
       },
       json: true,
     }, (error, response, body) => {
@@ -79,16 +79,28 @@ app.get('/', (req, res) => {
          console.log('error', error); 
       }
       const urls = body.data.viewer;
+      const vision={};
+      vision.url=body.data.viewer.avatarUrl
       console.log(urls);
-      request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0',{
-        urls,
+      
+            request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0',{
+        vision,
         headers: {
         'User-Agent': 'my glitch app',
-        'Authorization': `Bearer ${req.user.token}`,
-      },
+        'Authorization': `Bearer ${process.env.COG_KEY}`,
+        },
+          json:true,
+    },(error, response, body) => {
+      if (error) {
+         console.log('error', error); 
+      }
+              else{
+                res.send(response);
+              }
+              
+            })
 
     })
-
   } else {
      // render homepage with login to GitHub button
     res.redirect('/login'); 
