@@ -87,8 +87,7 @@ app.get('/', (req, res) => {
             request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description',{
         vision,
         headers: {
-        'User-Agent': 'my glitch app',
-          'Content-Type':'application/json',
+        'Content-Type':'application/json',
         'Ocp-Apim-Subscription-Key': `${process.env.COG_KEY}`,
         },
           json:true,
@@ -97,11 +96,11 @@ app.get('/', (req, res) => {
          console.log('error', error); 
       }
               else{
-                console.log(response);
                 res.send(response.description);
+                console.log(response.message);
               }
               
-            })
+            })hai hi nahi
 
     })
   } else {
