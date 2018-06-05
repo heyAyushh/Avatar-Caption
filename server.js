@@ -12,7 +12,7 @@ const axios = require('axios');
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "https://pool-mosquito.glitch.me/callback"
+    callbackURL: "https://avatar-caption.glitch.me/callback"
 }, function(accessToken, refreshToken, profile, cb) {
     const user = {
       token: accessToken
