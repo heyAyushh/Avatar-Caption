@@ -80,9 +80,8 @@ app.get('/', (req, res) => {
       }
       const urls = body.data.viewer;
       console.log(urls);
-      res.send(urls)
 
-    }).pipe(request.post())
+    }).pipe(request.post('')      
   } else {
      // render homepage with login to GitHub button
     res.redirect('/login'); 
