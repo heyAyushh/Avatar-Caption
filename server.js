@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
       console.log(vision);
       console.log(urls);
       
-            request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0',{
+            request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description',{
         vision,
         headers: {
         'User-Agent': 'my glitch app',
@@ -97,7 +97,8 @@ app.get('/', (req, res) => {
          console.log('error', error); 
       }
               else{
-                res.send(response);
+                console.log(response);
+                res.send(response.description);
               }
               
             })
