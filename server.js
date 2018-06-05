@@ -7,7 +7,6 @@ const stats = require('stats-lite');
 const exphbs  = require('express-handlebars');
 const axios = require('axios');
 
-/*
 // setup, authentication and session boilerplate
 // -------------------------------------------------------------------------------
 passport.use(new GitHubStrategy({
@@ -85,24 +84,20 @@ app.get('/', (req, res) => {
       const vision={};
       vision.url=body.data.viewer.avatarUrl
       console.log(vision);
-      console.log(urls);
+
+const url = 'https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description'
       
-            request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description',{
-        vision,
-        headers: {
-        'Content-Type':'application/json',
-        'Ocp-Apim-Subscription-Key': `${process.env.COG_KEY}`,
-        },
-    },(error, response, body) => {
-      if (error) {
-         console.log('error', error); 
-      }
-              else{
-                res.send(response);
-                console.log(response.message);
-              }
-              
-            })
+     var config = {
+    headers: {'Ocp-Apim-Subscription-Key': process.env.COG_KEY,
+'Content-Type':'application/json'}
+  };
+
+   axios.post(url, vision ,config)
+      .then(function (response) {
+        console.log(response.data.description.captions[0].text);
+     res.send(response.data.description.captions[0].text);
+   });
+     
     })
   } else {
      // render homepage with login to GitHub button
@@ -115,16 +110,4 @@ app.get('/', (req, res) => {
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
-*/      const vision={};
-      vision.url="https://avatars3.githubusercontent.com/u/17379963?v=4"
-      console.log(vision);
-      
-            axios.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description',{
-        vision,
-        headers: {
-        'Content-Type':'application/json',
-        'Ocp-Apim-Subscription-Key': `${process.env.COG_KEY}`,
-        },
-              
-    }).then (function (response) {
- console.log(response);})
+
