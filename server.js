@@ -5,6 +5,8 @@ const GitHubStrategy = require('passport-github').Strategy;
 const request = require('request');
 const stats = require('stats-lite');
 const exphbs  = require('express-handlebars');
+const axios = require('axios');
+
 /*
 // setup, authentication and session boilerplate
 // -------------------------------------------------------------------------------
@@ -114,21 +116,15 @@ var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 */      const vision={};
-      vision.url=body.data.viewer.avatarUrl
+      vision.url="https://avatars3.githubusercontent.com/u/17379963?v=4"
       console.log(vision);
-      console.log(urls);
       
-            request.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description',{
+            axios.post('https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description',{
         vision,
         headers: {
         'Content-Type':'application/json',
         'Ocp-Apim-Subscription-Key': `${process.env.COG_KEY}`,
         },
-    },(error, response, body) => {
-      if (error) {
-         console.log('error', error); 
-      }
-              else{
-                res.send(response);
-                console.log(response.message);
-              }
+              
+    }).then (function (response) {
+ console.log(response);})
